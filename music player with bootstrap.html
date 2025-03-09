@@ -16,238 +16,149 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body style="background-color: #f7cfd8">
-    <center>
-      <h2>Welcome to the music app</h2>
-    </center>
-    <center>
-      <textarea class="current-mood" placeholder="What is your current mood"></textarea>
-    </center>
-    <center>
-      <button class="btn btn-primary" onclick="searchMood()">submit</button>
-    </center>
-    <div class="container my-2">
+  <body>
+    <div class="container" style="margin-bottom: 30px">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mood-container">
+            <textarea
+              class="current-mood"
+              placeholder="Describe your current mood..."
+            ></textarea>
+            <button class="btn-submit" onclick="searchMood()">Submit</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p class="profile">
+            Hi User <i class="fa fa-user-circle fa-2x profile-icon"></i>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
       <div class="row">
         <div class="col m-2">
-          <p
-            class="collapsible-button"
-            data-toggle="collapse"
-            data-target="#collapseID1"
-            aria-expanded="false"
-            aria-controls="collapseID1"
-            style="background-color: #a6f1e0"
-          >
-            happy
-          </p>
-          <div class="collapse" id="collapseID1">
-            <ul>
-              <button class="song-name" onclick="loadTrack(0)">
-                pala palakura song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(1)">
-                Yello pullelo song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(2)">
-                enjoy enjaami song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(3)">
-                newyork nagaram song
-              </button>
-            </ul>
+          <div class="mood-card">
+            <div
+              class="collapsible-button"
+              onclick="listMusic('happy')"
+              style="background-image: url(./assets/moods/happy.jpeg)"
+            ></div>
+            <p class="mood-name">Happy</p>
           </div>
         </div>
         <div class="col m-2">
-          <p
+          <div
             class="collapsible-button"
-            data-toggle="collapse"
-            data-target="#collapseID2"
-            aria-expanded="false"
-            aria-controls="collapseID2"
-            style="background-color: burlywood"
-          >
-            sad
-          </p>
-          <div class="collapse" id="collapseID2">
-            <ul>
-              <button class="song-name" onclick="loadTrack(4)">
-                kanave song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(5)">
-                vennmegam song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(6)">
-                thoduvanam song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(7)">
-                emaye song
-              </button>
-            </ul>
-          </div>
+            onclick="listMusic('sad')"
+            style="background-image: url(./assets/moods/sad.jpeg)"
+          ></div>
+          <p class="mood-name">Sad</p>
         </div>
         <div class="col m-2">
-          <p
+          <div
             class="collapsible-button"
-            data-toggle="collapse"
-            data-target="#collapseID3"
-            aria-expanded="false"
-            aria-controls="collapseID3"
-            style="background-color: #dd88cf"
-          >
-            vibe
-          </p>
-          <div class="collapse" id="collapseID3">
-            <ul>
-              <button class="song-name" onclick="loadTrack(8)">
-                kathala kannala song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(9)">
-                no money song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(10)">
-                taxi taxi song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(11)">
-                yathi yathi song
-              </button>
-            </ul>
-          </div>
+            onclick="listMusic('vibe')"
+            style="background-image: url(./assets/moods/anger.jpeg)"
+          ></div>
+          <p class="mood-name">Anger</p>
         </div>
         <div class="col m-2">
-          <p
+          <div
             class="collapsible-button"
-            data-toggle="collapse"
-            data-target="#collapseID4"
-            aria-expanded="false"
-            aria-controls="collapseID4"
-            style="background-color: #5c7285"
-          >
-            depression
-          </p>
-          <div class="collapse" id="collapseID4">
-            <ul>
-              <button class="song-name" onclick="loadTrack(12)">
-                thensudare song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(13)">
-                oru naalil song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(14)">
-                poi vazhva song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(15)">
-                vane vane song
-              </button>
-            </ul>
-          </div>
+            onclick="listMusic('depression')"
+            style="background-image: url(./assets/moods/fear.jpeg)"
+          ></div>
+          <p class="mood-name">Fear</p>
         </div>
         <div class="col m-2">
-          <p
+          <div
             class="collapsible-button"
-            data-toggle="collapse"
-            data-target="#collapseID5"
-            aria-expanded="false"
-            aria-controls="collapseID5"
-            style="background-color: #fada7a"
-          >
-            lonely
-          </p>
-          <div class="collapse" id="collapseID5">
-            <ul>
-              <button class="song-name" onclick="loadTrack(16)">
-                en enniya thanimaiye song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(17)">
-                life of ram song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(18)">
-                idhuvum kadanthu pogum song
-              </button>
-
-              <button class="song-name" onclick="loadTrack(19)">
-                usurea song
-              </button>
-            </ul>
-          </div>
+            onclick="listMusic('lonely')"
+            style="background-image: url(./assets/moods/shame.jpeg)"
+          ></div>
+          <p class="mood-name">Shame</p>
         </div>
       </div>
     </div>
 
-    <!-- Widget start -->
-    <div class="player">
-      <div class="wrapper">
-        <div class="details">
-          <div class="track-art"></div>
-          <div class="track-name">Track Name</div>
-          <div class="track-artist">Track Artist</div>
-          <div class="slider-container">
-            <div class="current-time">00:00</div>
-            <input
-              type="range"
-              min="1"
-              max="100"
-              value="0"
-              class="seek_slider"
-              onchange="seekTo()"
-            />
-            <div class="total-duration">00:00</div>
-          </div>
-          <div class="slider-container">
-            <i class="fa fa-volume-down"></i>
-            <input
-              type="range"
-              min="1"
-              max="100"
-              value="99"
-              class="volume-slider"
-              onchange="setVolume()"
-            />
-            <i class="fa fa-volume-up"></i>
-          </div>
-          <div class="buttons">
-            <div class="random-track" onclick="randomTrack()">
-              <i class="fas fa-random fa-1x" title="random"></i>
-            </div>
-            <div class="prev-track" onclick="prevTrack()">
-              <i class="fa fa-step-backward fa-1x"></i>
-            </div>
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-md-4">
+          <p class="title">Now Playing</p>
+          <!-- Widget start -->
+          <div class="player">
+            <div class="wrapper">
+              <div class="details">
+                <div class="track-art"></div>
+                <div class="track-name">Track Name</div>
+                <div class="track-artist">Track Artist</div>
+                <div class="slider-container">
+                  <div class="current-time">00:00</div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value="0"
+                    class="seek_slider"
+                    onchange="seekTo()"
+                  />
+                  <div class="total-duration">00:00</div>
+                </div>
+                <div class="slider-container">
+                  <i class="fa fa-volume-down"></i>
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value="99"
+                    class="volume-slider"
+                    onchange="setVolume()"
+                  />
+                  <i class="fa fa-volume-up"></i>
+                </div>
+                <div class="buttons">
+                  <div class="random-track" onclick="randomTrack()">
+                    <i class="fas fa-random fa-1x" title="random"></i>
+                  </div>
+                  <div class="prev-track" onclick="prevTrack()">
+                    <i class="fa fa-step-backward fa-1x"></i>
+                  </div>
 
-            <div class="playpause-track" onclick="playpauseTrack()">
-              <i class="fa fa-play-circle fa-2x"></i>
+                  <div class="playpause-track" onclick="playpauseTrack()">
+                    <i class="fa fa-play-circle fa-2x"></i>
+                  </div>
+                  <div class="next-track" onclick="nextTrack()">
+                    <i class="fa fa-step-forward fa-1x"></i>
+                  </div>
+                  <div class="repeat-track" onclick="repeatTrack()">
+                    <i class="fa fa-repeat fa-1x" title="repeat"></i>
+                  </div>
+                  <div id="wave">
+                    <span class="stroke"></span>
+                    <span class="stroke"></span>
+                    <span class="stroke"></span>
+                    <span class="stroke"></span>
+                    <span class="stroke"></span>
+                    <span class="stroke"></span>
+                    <span class="stroke"></span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="next-track" onclick="nextTrack()">
-              <i class="fa fa-step-forward fa-1x"></i>
-            </div>
-            <div class="repeat-track" onclick="repeatTrack()">
-              <i class="fa fa-repeat fa-1x" title="repeat"></i>
-            </div>
-            <div id="wave">
-              <span class="stroke"></span>
-              <span class="stroke"></span>
-              <span class="stroke"></span>
-              <span class="stroke"></span>
-              <span class="stroke"></span>
-              <span class="stroke"></span>
-              <span class="stroke"></span>
-            </div>
+          </div>
+          <!-- Widget end -->
+        </div>
+        <div class="col-md-8">
+          <!-- Music list -->
+          <p class="title">Songs for Your Mood 🎶</p>
+          <div class="song-list container">
+            <ul id="song-list"></ul>
           </div>
         </div>
       </div>
     </div>
-    <!-- Widget end -->
 
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -264,6 +175,6 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-    <script src="./main2.js"></script>
+    <script src="./main.js"></script>
   </body>
 </html>

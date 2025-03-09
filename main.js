@@ -25,7 +25,7 @@ let updateTimer;
 const music_list = [
   {
     index: 0,
-    img: "./assets/pala palakura image.png",
+    img: "./assets/pala_palakura_image.png",
     name: "pala palakura",
     artist: "Harris Jayaraj",
     music: "./assets/Pala Palakura.mp3",
@@ -33,7 +33,7 @@ const music_list = [
   },
   {
     index: 1,
-    img: "./assets/yelo pullelo img.jpg",
+    img: "./assets/yelo_pullelo_img.jpg",
     name: "yello pullelo",
     artist: "Anirudh Ravichander",
     music: "./assets/Yelo Pullelo.mp3",
@@ -49,7 +49,7 @@ const music_list = [
   },
   {
     index: 3,
-    img: "./assets/newyork nagaram photo.webp",
+    img: "./assets/newyork_nagaram_photo.webp",
     name: "newyork nagaram",
     artist: " A.R.Rahman",
     music: "./assets/New York Nagaram.mp3",
@@ -64,99 +64,130 @@ const music_list = [
     mood: "sad"
   },
   {
+    index: 5,
     img: "./assets/yaradi-nee-mohini (1).webp",
     name: "vennmegam",
     artist: " Yuvan Shankar Raja",
     music: "./assets/Venmegam-Pennaga.mp3",
+     mood: "sad"
   },
   {
+    index: 6,
     img: "./assets/anegan.webp",
     name: "thodu vanam",
     artist: "Hariharan, Shakthishree Gopalan",
     music: "./assets/Thodu-Vaanam.mp3",
+     mood: "sad"
   },
   {
+    index: 7,
     img: "./assets/raja-rani-2013.webp",
     name: "emaye emaye",
     artist: "G.V.Prakash Kumar",
     music: "./assets/Imaye-Imaye.mp3",
+     mood: "sad"
   },
   {
+    index: 8,
     img: "./assets/anjathey.webp",
     name: "kathaala kannala",
     artist: " Sundar C Babu",
     music: "./assets/Kathaala-Kannaala.mp3",
+     mood: "vibe"
   },
   {
+    index: 9,
     img: "./assets/vaanam-2010.webp",
     name: "no money no money",
     artist: " Yuvan Shankar Raja",
     music: "./assets/No-Money-No-Honey.mp3",
+     mood: "vibe"
   },
   {
+    index: 10,
     img: "./assets/sakkarakatti-2008.webp",
     name: "taxi taxi",
     artist: " A.R.Rahman",
     music: "./assets/Taxi-Taxi.mp3",
+     mood: "vibe"
   },
   {
+    index: 11,
     img: "./assets/vaaranam-aayiram-2008.webp",
     name: "yethi yethi",
     artist: " Harris Jayaraj",
     music: "./assets/Yethi-Yethi-MassTamilan.com.mp3",
+     mood: "vibe"
   },
   {
+    index: 12,
     img: "./assets/lover-tamil-2024.webp",
     name: "lover",
     artist: "Sean Roldan",
     music: "./assets/Theansudare.mp3",
+     mood: "depression"
   },
   {
+    index: 13,
     img: "./assets/outhu pettai.webp",
     name: "oru naalil",
     artist: "Yuvan Shankar Raja",
     music: "./assets/Oru-Naalil---It-All-Comes-Down-To-this!.mp3",
+     mood: "depression"
   },
   {
+    index: 14,
     img: "./assets/manithan-2016.webp",
     name: "poi vazhva",
     artist: ": Santhosh Narayanan",
     music: "./assets/Poi-Vazhva.mp3",
+     mood: "depression"
   },
   {
+    index: 15,
     img: "./assets/amaran-tamil-2024.webp",
     name: "vane vane",
     artist: " G. V. Prakash Kumar",
     music: "./assets/Vaane Vaane.mp3",
+     mood: "depression"
   },
   {
+    index: 16,
     img: "./assets/teddy-2020.webp",
     name: "en enniya thanimaiyea",
     artist: " D.Imman",
     music: "./assets/En-Iniya-Thanimaye-MassTamilan.io.mp3",
+     mood: "lonely"
   },
   {
+    index: 17,
     img: "./assets/96-2018.webp",
     name: "life of ram",
     artist: "Govind Vasantha",
     music: "./assets/The_Life_Of_Ram-MassTamilan.com.mp3",
+     mood: "lonely"
   },
   {
+    index: 18,
     img: "./assets/netrikann-tamil-2021.webp",
     name: "idhuvum kadanthu pogum",
     artist: " Girishh Gopalakrishnan",
     music:
       "./assets/Idhuvum-Kadandhu-Pogum-(The-Healing-Song)-MassTamilan.fm.mp3",
+       mood: "lonely"
   },
   {
+    index: 19,
     img: "./assets/sivappu-manjal-pachai-2019.webp",
     name: "usurea",
     artist: " Siddhu Kumar",
     music: "./assets/Usure-MassTamilan.org.mp3",
+     mood: "lonely"
   },
 ];
 
 loadTrack(track_index);
+listMusic("happy")
 
 function loadTrack(track_index) {
   clearInterval(updateTimer);
@@ -173,19 +204,41 @@ function loadTrack(track_index) {
   updateTimer = setInterval(setUpdate, 1000);
   curr_track.addEventListener("ended", nextTrack);
 }
-
-function searchMood(){
+function searchMood() {
   let inputText = current_mood.value;
-  
-  fetch("http://localhost:5000/detect")
-    .then(response => response.json())
-    .then(data => { // {"mood": 'happy'}
-      let detectedMood = data["mood"]; //happy
-      let filterredMusicList = music_list.filter((x) => x.mood === detectedMood)
-      let song = filterredMusicList[0];
-      track_index = song.index;
-      loadTrack(track_index);
-    }); 
+
+  fetch("http://localhost:5000/detect", {
+    method: "POST",  // Change method to POST
+    headers: {
+      "Content-Type": "application/json",  // tells the server that were are sending the data.
+    },
+    body: JSON.stringify({ text: inputText }), // Convert the input text into JSON format
+  })
+    .then(response => {  //If the server returns an error 
+      if (!response.ok) {  //, it throws an error. or it converts the response to JSON format.
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      if (!data.mood) {   //store the detect mood
+        throw new Error("Mood data missing in response");
+      }
+
+      let detectedMood = data.mood; //store the detect mood
+      let filteredMusicList = music_list.filter(song => song.mood === detectedMood); //search the song what does the mood i'm
+      if (filteredMusicList.length > 0) {
+        let song = filteredMusicList[0];  // Get the first matching song
+        track_index = song.index;   // Get the song index
+        loadTrack(track_index);
+        listMusic(detectedMood);
+      } else {
+        console.warn("No matching songs found for mood:", detectedMood);
+      }
+    })
+    .catch(error => {
+      console.error("Error detecting mood:", error);
+    });
 }
 
 function reset() {
@@ -286,37 +339,22 @@ function setUpdate() {
   }
 }
 
+function listMusic(mood) {
+  let songs = music_list.filter(song => song.mood === mood); 
+  const songList = document.getElementById("song-list");
+  songList.innerHTML = "";
 
-
-
-/**
- * 
- * fetch("http://localhost:5000/detect")
- *  .then(
- *      (response) => 
- *        response.text()
- *    
- *  )
- *  .then(data => console.log(data))
-
-
-
-    fetch("http://localhost:5000/detect").then(
-      parameters => {
-        code; one line code which includes return   
-      }
-    ).then(
-      (parameters) => {
-        code  
-      }
-    
-    )
-
-
-
-
-
-
-
- * 
- */
+  songs.forEach((song) => {
+    const li = document.createElement("li");
+    li.classList.add("song-name");
+    li.classList.add("row");
+    li.innerHTML = `<li class="song-item" onclick="loadTrack(${song.index})">
+                      <span class="song-info">
+                        <img src="${song.img}" class="img-list"/>
+                        ${song.name}
+                      </span>
+                      <i class="fa fa-play-circle fa-2x"></i>
+                    </li>`;
+    songList.appendChild(li);
+  });
+}
